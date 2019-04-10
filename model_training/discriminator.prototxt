@@ -1,0 +1,302 @@
+# do not feed fmri to the discriminator
+
+force_backward: true
+
+input: "data"
+input_shape {
+  dim: 64
+  dim: 3
+  dim: 227
+  dim: 227
+}
+
+input: "label"
+input_shape {
+  dim: 64
+  dim: 1
+  dim: 1
+  dim: 1
+}
+
+
+# Discriminator net
+
+layer {
+  name: "Dconv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "Dconv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 32
+    kernel_size: 7
+    stride: 4
+    weight_filler {
+      type: "msra"
+      msra_coeff: 0.1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    #engine: CUDNN
+  }
+}
+layer {
+  name: "Drelu1"
+  type: "ReLU"
+  bottom: "Dconv1"
+  top: "Dconv1"
+}
+layer {
+  name: "Dconv2"
+  type: "Convolution"
+  bottom: "Dconv1"
+  top: "Dconv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "msra"
+      msra_coeff: 1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    #engine: CUDNN
+  }
+}
+layer {
+  name: "Drelu2"
+  type: "ReLU"
+  bottom: "Dconv2"
+  top: "Dconv2"
+}
+layer {
+  name: "Dconv3"
+  type: "Convolution"
+  bottom: "Dconv2"
+  top: "Dconv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 128
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "msra"
+      msra_coeff: 1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    #engine: CUDNN
+  }
+}
+layer {
+  name: "Drelu3"
+  type: "ReLU"
+  bottom: "Dconv3"
+  top: "Dconv3"
+}
+layer {
+  name: "Dconv4"
+  type: "Convolution"
+  bottom: "Dconv3"
+  top: "Dconv4"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 256
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+      msra_coeff: 1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    #engine: CUDNN
+  }
+}
+layer {
+  name: "Drelu4"
+  type: "ReLU"
+  bottom: "Dconv4"
+  top: "Dconv4"
+}
+layer {
+  name: "Dconv5"
+  type: "Convolution"
+  bottom: "Dconv4"
+  top: "Dconv5"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 256
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "msra"
+      msra_coeff: 1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    #engine: CUDNN
+  }
+}
+layer { 
+  name: "relu5"
+  type: "ReLU"
+  bottom: "Dconv5"
+  top: "Dconv5"
+}
+
+layer {
+  name: "Dpool5"
+  type: "Pooling"
+  bottom: "Dconv5"
+  top: "Dpool5"
+  pooling_param {
+    pool: AVE
+    kernel_size: 11
+    stride: 11
+  }
+}
+layer {
+  name: "Dpool5_reshape"
+  type: "Reshape"
+  bottom: "Dpool5"
+  top: "Dpool5_reshape"
+  reshape_param {
+    shape {dim: 64 dim: 256}
+  }
+}
+
+
+layer {
+  name: "drop5"
+  type: "Dropout"
+  bottom: "Dpool5_reshape"
+  top: "drop5"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "Dfc6"
+  type: "InnerProduct"
+  bottom: "drop5"
+  top: "Dfc6"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  inner_product_param {
+    num_output: 256
+    weight_filler {
+      type: "msra"
+      msra_coeff: 0.1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer { 
+  name: "Drelu6"
+  type: "ReLU"
+  bottom: "Dfc6"
+  top: "Dfc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "Dfc6"
+  top: "drop6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "Dfc7"
+  type: "InnerProduct"
+  bottom: "drop6"
+  top: "Dfc7"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  inner_product_param {
+    num_output: 2
+    weight_filler {
+      type: "msra"
+      msra_coeff: 0.1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+
+layer {
+  name: "discr_loss"
+  type: "SoftmaxWithLoss"
+  bottom: "Dfc7"
+  bottom: "label"
+  top: "discr_loss"
+  loss_weight: 100
+#   loss_weight: 1
+}
+
