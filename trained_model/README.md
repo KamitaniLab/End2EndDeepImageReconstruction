@@ -10,7 +10,7 @@ The pre-trained models of 3 human subjects are released:
 - trainedmodel_sub-02
 - trainedmodel_sub-03
 
-In the directory of each subject, there are 2 files:
+In the directory of each subject, there are 4 files:
 
 - **generator.caffemodel**: the Caffe caffemodel file for the trained generator
 - **generator_test.prototxt**: the Caffe prototxt file for the generator
