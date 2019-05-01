@@ -19,7 +19,7 @@ function download_file () {
     if [ -f $dldir/$dlfile ]; then
         echo "$dlfile has already been downloaded."
     else
-        curl -o $dldir/$dlfile $dlurl
+        wget -O $dldir/$dlfile $dlurl
     fi
 }
 
@@ -39,5 +39,3 @@ download_file https://ndownloader.figshare.com/files/14830856 ./sub-03_perceptio
 
 
 echo "done!"
-
-
