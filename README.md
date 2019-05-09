@@ -31,11 +31,11 @@ We provide example scripts to reconstruct images from human brain fMRI activity 
 You can train your own models by using the training scripts (see [model_training/README.md](model_training/README.md)).
 To do so, you need:
 
-- preprocessed fMRI data and stimulus images (see [fmri_data/README.md](fmri_data/README.md))
-- create LMDB data (see [lmdb_data/README.md](lmdb_data/README.md)) 
-- pre-trained CNN model (see [bvlc_reference_caffenet/README.md](bvlc_reference_caffenet/README.md))
-- set parameters in the training scripts (see [model_training/README.md](model_training/README.md)) 
-- run the training script:
+1. get preprocessed fMRI data and stimulus images (see [fmri_data/README.md](fmri_data/README.md))
+2. create LMDB data (see [lmdb_data/README.md](lmdb_data/README.md)) 
+3. pre-trained CNN model (see [bvlc_reference_caffenet/README.md](bvlc_reference_caffenet/README.md))
+4. set parameters in the training scripts (see [model_training/README.md](model_training/README.md)) 
+5. run the training script:
 
       $ cd model_training
       $ python train.py`
