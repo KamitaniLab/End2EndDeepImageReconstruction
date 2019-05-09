@@ -1,8 +1,6 @@
 # End-to-End Deep Image Reconstruction
 
-Data, pre-trained models and codes for [Shen, Dwivedi, Majima, Horikawa, and Kamitani (2019) End-to-end deep image reconstruction from human brain activity. Front. Comput. Neurosci](https://www.frontiersin.org/articles/10.3389/fncom.2019.00021/full). ([bioRxiv preprint](https://www.biorxiv.org/content/10.1101/272518v1)).
-
-
+Data, pre-trained models and code for [Shen, Dwivedi, Majima, Horikawa, and Kamitani (2019) End-to-end deep image reconstruction from human brain activity. Front. Comput. Neurosci](https://www.frontiersin.org/articles/10.3389/fncom.2019.00021/full). ([bioRxiv preprint](https://www.biorxiv.org/content/10.1101/272518v1)).
 
 ## Requirements
 
@@ -13,8 +11,6 @@ Data, pre-trained models and codes for [Shen, Dwivedi, Majima, Horikawa, and Kam
 - Caffe with up-convolutional layer
     - https://github.com/dosovits/caffe-fr-chairs (Branch: deepsim)
 
-
-
 ## Usage
 
 ### Reconstruct image using pre-trained model
@@ -24,36 +20,25 @@ We have released pre-trained models (generator networks of the end-to-end deep i
 You can use these pre-trained models to reconstruct images from fMRI data (see [fmri_data/README.md](fmri_data/README.md)).
 
 The images are reconstructed by inputting the test fMRI data to the trained generator, and forward passing through the generator net.
-We provide example codes to reconstruct images from human brain fMRI activity (please find the codes in [model_test/](model_test/)):
+We provide example scripts to reconstruct images from human brain fMRI activity (please find the scripts in [model_test/](model_test/)):
 
 - `reconstruct_img_from_fmri_subject_01.py`
-
 - `reconstruct_img_from_fmri_subject_02.py`
-
 - `reconstruct_img_from_fmri_subject_03.py`
-
-
 
 ### Train your own models
 
-You can train your own models by using the training codes (see [model_training/README.md](model_training/README.md)).
+You can train your own models by using the training scripts (see [model_training/README.md](model_training/README.md)).
 To do so, you need:
 
 - preprocessed fMRI data and stimulus images (see [fmri_data/README.md](fmri_data/README.md))
-
 - create LMDB data (see [lmdb_data/README.md](lmdb_data/README.md)) 
-
 - pre-trained CNN model (see [bvlc_reference_caffenet/README.md](bvlc_reference_caffenet/README.md))
+- set parameters in the training scripts (see [model_training/README.md](model_training/README.md)) 
+- run the training script:
 
-- set parameters in the training codes (see [model_training/README.md](model_training/README.md)) 
-
-- run the training codes:
-
-    - `cd model_training`
-    
-    - `python train.py`
-
-
+      $ cd model_training
+      $ python train.py`
 
 ## Reference
 
@@ -61,26 +46,19 @@ To do so, you need:
 
 The article is available at: http://arxiv.org/abs/1602.02644
 
+[2] The code for training models are modified from the released code of the above article, and the original code are available at: https://lmb.informatik.uni-freiburg.de/resources/binaries/arxiv2016_alexnet_inversion_with_gans/release_deepsim_v0.5.zip
 
-[2] The codes for training models are modified from the released codes of the above article, and the original codes are available at: https://lmb.informatik.uni-freiburg.de/resources/binaries/arxiv2016_alexnet_inversion_with_gans/release_deepsim_v0.5.zip
-
-
-[3] The codes for creating LMDB data are based on the example codes shared in: http://deepdish.io/2015/04/28/creating-lmdb-in-python/
-
+[3] The code for creating LMDB data are based on the example code shared in: http://deepdish.io/2015/04/28/creating-lmdb-in-python/
 
 [4] For the details of fMRI preprocessing, please refer to: Shen, Horikawa, Majima, and Kamitani (2019) Deep image reconstruction from human brain activity, http://dx.doi.org/10.1371/journal.pcbi.1006633
-
-
 
 ## Author
 
 Shen Guo-Hua (E-mail: shen-gh@atr.jp)
-
-
 
 ## Acknowledgement
 
 The author thanks precious discussion and advice from the members in DNI (http://www.cns.atr.jp/dni/) and Kamitani Lab (http://kamitani-lab.ist.i.kyoto-u.ac.jp/).
 The author thanks Mitsuaki Tsukamoto for software installation and computational environment setting.
 The author thanks Tomoyasu Horikawa for fMRI data preprocessing.
-The author thanks Shuntaro Aoki for data curation and example codes to read fMRI data.
+The author thanks Shuntaro Aoki for data curation and example code to read fMRI data.
