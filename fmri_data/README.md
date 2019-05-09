@@ -1,4 +1,4 @@
-# End2EndDeepImageReconstruction: fMRI data
+# End-to-End Deep Image Reconstruction: fMRI data
 
 The raw (unpreprocessed) fMRI data are available at <https://openneuro.org/datasets/ds001506>.
 
@@ -19,7 +19,7 @@ To run the example code, you need to download the following preprocessed fMRI da
 
 You can use the script, `download_fmri.sh`, to download these required files.
 
-Useage:
+Usage:
 
 ``` shellsession
 $ bash download_fmri.sh
@@ -27,16 +27,11 @@ $ bash download_fmri.sh
 
 ## Stimulus images
 
-Each fMRI data sample is labeled by name of the stimulus image.
+Each fMRI data sample is labeled by name of the stimulus image. The name of the stimulus image is converted to a floating number (â€˜stimulus_idâ€™) as follows:
 
-The name of the stimulus image is converted to a floating number (‘stimulus_id’) as follows:
+- The integer part of the floating number indicates WordNet ID for the synset (category);
+- The decimal part of the floating number indicates image ID;
 
-The integer part of the floating number indicates WordNet ID for the synset (category);
+For example, '1518878.005958' represents 'image 5958 in synset n01518878' (â€˜ostrichâ€™).
 
-The decimal part of the floating number indicates image ID;
-
-For example, '1518878.005958' represents 'image 5958 in synset n01518878' (‘ostrich’).
-
-We do not include stimulus image files in the open dataset because of license issues.
-
-Please contact us via email (<brainliner-admin@atr.jp>) for sharing the image files.
+We do not include stimulus image files in the open dataset because of license issues. Please contact us via email (<brainliner-admin@atr.jp>) for sharing the image files.
