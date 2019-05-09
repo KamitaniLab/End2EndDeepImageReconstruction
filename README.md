@@ -37,8 +37,8 @@ To do so, you need:
 4. set parameters in the training scripts (see [model_training/README.md](model_training/README.md)) 
 5. run the training script:
 
-      $ cd model_training
-      $ python train.py`
+       $ cd model_training
+       $ python train.py`
 
 ## Reference
 
