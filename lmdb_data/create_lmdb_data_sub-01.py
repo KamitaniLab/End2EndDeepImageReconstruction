@@ -20,10 +20,10 @@ from datetime import datetime
 img_size = (248,248)  # img size
 # for the purpose of image jittering, we prepare the images to be larger than 227 x 227
 
-img_dir = 'path/to/directory/of/training/images'  # the directory for all the traning images
+img_dir = '../data/images/training'  # the directory for all the traning images
 img_file_suffix = '.JPEG'  # the suffix of image file
 
-fmri_data_file = '../fmri_data/sub-01_perceptionNaturalImageTraining_original_VC.h5'  # the file of the fmri data
+fmri_data_file = '../data/fmri/sub-01_perceptionNaturalImageTraining_original_VC.h5'  # the file of the fmri data
 ROI_selector_str = 'ROI_VC = 1'  # Data select expression specifying columns (ROIs) used as the training fmri data
 label_str = 'stimulus_id'  # specifying columns used as the label of the training fmri data
 
