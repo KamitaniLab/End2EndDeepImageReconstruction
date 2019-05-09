@@ -1,0 +1,5 @@
+*.h5
+
+fmri/*
+images/*
+!.gitkeep
