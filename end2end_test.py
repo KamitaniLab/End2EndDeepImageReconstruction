@@ -92,11 +92,25 @@ def img_deprocess(img, mean_img=None):
         mean_img = np.tile(mean_img, [img_size[1], img_size[2], 1])
     return np.dstack(img[::-1]) + mean_img
 
+
 def normalize_image(img):
     img = img - img.min()
     if img.max() > 0:
         img = img * (255.0 / img.max())
     img = np.uint8(img)
+    return img
+
+
+def clip_extreme_value(img, pct=1):
+    '''Clip the pixels with extreme values'''
+    if pct < 0:
+        pct = 0.
+
+    if pct > 100:
+        pct = 100.
+
+    img = np.clip(img, np.percentile(img, pct/2.),
+                  np.percentile(img, 100-pct/2.))
     return img
 
 
@@ -211,6 +225,10 @@ for dat in data_table:
                 output_file_base = 'image-' + img
 
             sio.savemat(os.path.join(output_image_dir, output_file_base + '.mat'), {'gen_img': gen_img})
-            PIL.Image.fromarray(normalize_image(gen_img)).save(os.path.join(output_image_dir, output_file_base + '.jpg'))
+            # To better display the image, clip pixels with extreme values (0.02% of
+            # pixels with extreme low values and 0.02% of the pixels with extreme high
+            # values). And then normalise the image by mapping the pixel value to be
+            # within [0,255]
+            PIL.Image.fromarray(normalize_image(clip_extreme_value(gen_img, pct=0.04))).save(os.path.join(output_image_dir, output_file_base + '.tif'))
 
 print('Done!')
