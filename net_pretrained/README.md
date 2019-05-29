@@ -20,7 +20,6 @@ In the directory of each subject, there are 4 files:
 To run `end2end_test.py` with the pretrained models, put the files as below:
 
     net_pretrained
-    ├── README.md
     ├── sub-01
     │   ├── generator.caffemodel
     │   └── generator_test.prototxt

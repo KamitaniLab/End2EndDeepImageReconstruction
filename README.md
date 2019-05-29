@@ -15,30 +15,32 @@ Data, pre-trained models and code for [Shen, Dwivedi, Majima, Horikawa, and Kami
 
 ### Reconstruct image using pre-trained model
 
-We have released pre-trained models (generator networks of the end-to-end deep image reconstruction models) of the 3 human subjects in our study (see [trained_model/README.md](trained_model/README.md)).
+We have released pre-trained models (generator networks of the end-to-end deep image reconstruction models) of the 3 human subjects in our study (see [net_pretrained/README.md](net_pretrained/README.md)).
 
-You can use these pre-trained models to reconstruct images from fMRI data (see [fmri_data/README.md](fmri_data/README.md)).
+You can use these pre-trained models to reconstruct images from fMRI data (see [data/README.md](data/README.md)).
 
 The images are reconstructed by inputting the test fMRI data to the trained generator, and forward passing through the generator net.
-We provide example scripts to reconstruct images from human brain fMRI activity (please find the scripts in [model_test/](model_test/)):
 
-- `reconstruct_img_from_fmri_subject_01.py`
-- `reconstruct_img_from_fmri_subject_02.py`
-- `reconstruct_img_from_fmri_subject_03.py`
+We provide an example script, `end2end_test.py`, to reconstruct images from human brain fMRI activity.
+
+``` shellsession
+$ python end2end_test.py
+```
 
 ### Train your own models
 
-You can train your own models by using the training scripts (see [model_training/README.md](model_training/README.md)).
+You can train your own models by using a training script (`end2end_training.py`).
 To do so, you need:
 
 1. get preprocessed fMRI data and stimulus images (see [data/README.md](data/README.md))
-2. create LMDB data (`end2end_create_lmdb.py`)
-3. pre-trained CNN model (see [bvlc_reference_caffenet/README.md](net/bvlc_reference_caffenet/README.md))
-4. set parameters in the training scripts (see [model_training/README.md](model_training/README.md)) 
+2. create LMDB data
+
+        $ python end2end_create_lmdb.py
+
+3. pre-trained CNN model (see [net/bvlc_reference_caffenet/README.md](net/bvlc_reference_caffenet/README.md))
 5. run the training script:
 
-       $ cd model_training
-       $ python train.py
+        $ python end2end_training.py
 
 ## Reference
 
