@@ -1,2 +1,3 @@
 lmdb/*
+net_trained/*
 !.gitkeep
