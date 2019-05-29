@@ -137,9 +137,8 @@ for sbj in fmri_data_table:
     print('----------------------------------------')
     print('Images')
 
-    env = lmdb.open(os.path.join(sbj['output_dir'], 'images'), map_size=map_size)
-
     map_size = 30 * 1024 * len(sample_index_list) * 10
+    env = lmdb.open(os.path.join(sbj['output_dir'], 'images'), map_size=map_size)
 
     with env.begin(write=True) as txn:
         for j0, sample_index in np.ndenumerate(sample_index_list):
@@ -154,11 +153,12 @@ for sbj in fmri_data_table:
             # Load images
             image_file = images_table[sample_label]
             img = PIL.Image.open(image_file)
+            img = np.asarray(img)
             img = imresize(img, img_size, interp='bilinear')
 
             # Monochrome --> RGB
             if img.ndim == 2:
-                img_rgb = np.zeros((img_size[0], img_size[1], 3))
+                img_rgb = np.zeros((img_size[0], img_size[1], 3), dtype=img.dtype)
                 img_rgb[:, :, 0] = img
                 img_rgb[:, :, 1] = img
                 img_rgb[:, :, 2] = img
