@@ -30,15 +30,14 @@ $ python end2end_test.py
 ### Train your own models
 
 You can train your own models by using a training script (`end2end_training.py`).
-To do so, you need:
 
-1. get preprocessed fMRI data and stimulus images (see [data/README.md](data/README.md))
-2. create LMDB data
+1. Get preprocessed fMRI data and stimulus images (see [data/README.md](data/README.md)).
+2. Create LMDB data. The LMDB data will be saved in `lmdb` directory.
 
         $ python end2end_create_lmdb.py
 
-3. pre-trained CNN model (see [net/bvlc_reference_caffenet/README.md](net/bvlc_reference_caffenet/README.md))
-5. run the training script:
+3. Download pre-trained CNN model (see [net/bvlc_reference_caffenet/README.md](net/bvlc_reference_caffenet/README.md)).
+5. Run the training script. The trained models will be saved in `net_trained` directory.
 
         $ python end2end_training.py
 
