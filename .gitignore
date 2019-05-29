@@ -1,3 +1,11 @@
 lmdb/*
 net_trained/*
+results/*
+tmp/*
 !.gitkeep
+
+.ipynb_checkpoints
+test
+
+.DS_Store
+._*
