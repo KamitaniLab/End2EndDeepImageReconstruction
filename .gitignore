@@ -1,0 +1,13 @@
+lmdb/*
+net_trained/*
+net_pretrained/*
+results/*
+tmp/*
+!.gitkeep
+!README.md
+
+.ipynb_checkpoints
+test
+
+.DS_Store
+._*

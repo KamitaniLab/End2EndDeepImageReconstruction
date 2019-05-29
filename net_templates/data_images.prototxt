@@ -1,10 +1,11 @@
+# Images data
 layer {
   name: "data"
   type: "Data"
   top: "data"
   top: "label"
   data_param {
-    source: "path/to/the/directory/of/lmdb/img"
+    source: "@DATAPATH@"
     backend: LMDB
     batch_size: 64
   }

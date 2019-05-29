@@ -1,3 +1,4 @@
+# v2
 # do not feed fmri to the discriminator
 
 force_backward: true

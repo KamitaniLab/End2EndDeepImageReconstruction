@@ -2,16 +2,8 @@ force_backward: true
 
 input: "feat"
 input_shape {
-  dim: 64
-  dim: 11726 # number of vox
-}
-
-input: "data"
-input_shape {
-  dim: 64
-  dim: 3
-  dim: 227
-  dim: 227
+  dim: 1
+  dim: @NUMVOXELS@
 }
 
 layer {
@@ -120,7 +112,7 @@ layer {
   top: "reshape_defc5"
   reshape_param {
     shape { 
-      dim: 64 
+      dim: 1
       dim: 256
       dim: 4
       dim: 4
@@ -450,29 +442,4 @@ layer {
     }
     #engine: CUDNN
   }
-}
-layer {
-  name: "deconv0_crop"
-  type: "CropSimple"
-  bottom: "deconv0"
-  top: "deconv0_crop"
-  crop_param {
-     crop_height: 227
-     crop_width: 227
-  }
-}
-layer {
-  name: "recon_loss"
-  type: "EuclideanLoss"
-  bottom: "deconv0_crop"
-  bottom: "data"
-  top: "recon_loss"
-  loss_weight: 2e-6
-#   loss_weight: 1e-10
-}
-layer {
-  name: "generated"
-  type: "Eltwise"
-  bottom: "deconv0_crop"
-  top: "generated"
 }
