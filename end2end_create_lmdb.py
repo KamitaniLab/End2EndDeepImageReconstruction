@@ -79,7 +79,7 @@ for sbj in fmri_data_table:
     #import pdb; pdb.set_trace()
     fmri_labels = fmri_data_bd.get('Label')[:, 1].flatten()
 
-    # Convet image labels in fMTI data from float to file name labes (str)
+    # Convet image labels in fMRI data from float to file name labes (str)
     fmri_labels = ['n%08d_%d' % (int(('%f' % a).split('.')[0]),
                                  int(('%f' % a).split('.')[1]))
                    for a in fmri_labels]
