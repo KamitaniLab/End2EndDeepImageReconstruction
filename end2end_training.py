@@ -70,15 +70,6 @@ if gpu_id >= 0:
     caffe.set_device(gpu_id)
     caffe.set_mode_gpu()
 
-# Parsing arguments
-argparse = ArgumentParser(description=__doc__)
-argparse.add_argument('--resume', nargs=1, type=int, dest='resume_snapshot',
-                      help='Snapshot from which the training resumes', default=[0])
-args = argparse.parse_args()
-
-if args.resume_snapshot[0]:
-    start_snapshot = args.resume_snapshot[0]
-
 # Training loop --------------------------------------------------------------
 
 for sbj in data_table:
@@ -184,23 +175,6 @@ for sbj in data_table:
     data_img_reader = caffe.AdamSolver(os.path.join(solver_dir, 'solver_data_images.prototxt'))
 
     encoder.net.copy_from(encoder_net)
-
-    # Load networks from snapshot (resuming)
-    if start_snapshot:
-        curr_snapshot_folder = os.path.join(snapshots_dir, str(start_snapshot))
-        print('\n === Starting from snapshot ' + curr_snapshot_folder + ' ===\n')
-
-        generator_caffemodel = os.path.join(curr_snapshot_folder, 'generator.caffemodel')
-        if os.path.isfile(generator_caffemodel):
-            generator.net.copy_from(generator_caffemodel)
-        else:
-            raise Exception('File %s does not exist' % generator_caffemodel)
-
-        discriminator_caffemodel = os.path.join(curr_snapshot_folder, 'discriminator.caffemodel')
-        if os.path.isfile(discriminator_caffemodel):
-            discriminator.net.copy_from(discriminator_caffemodel)
-        else:
-            raise Exception('File %s does not exist' % discriminator_caffemodel)
 
     # Read weights of losses
     recon_loss_weight = generator.net._blob_loss_weights[generator.net._blob_names_index['recon_loss']]
