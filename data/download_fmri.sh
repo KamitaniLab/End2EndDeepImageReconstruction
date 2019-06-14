@@ -19,7 +19,7 @@ function download_file () {
     if [ -f $dldir/$dlfile ]; then
         echo "$dlfile has already been downloaded."
     else
-        wget -O $dldir/$dlfile $dlurl
+        wget --no-check-certificate -O $dldir/$dlfile $dlurl
     fi
 }
 
