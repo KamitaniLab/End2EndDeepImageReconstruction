@@ -55,7 +55,11 @@ The article is available at: http://arxiv.org/abs/1602.02644
 
 ## Author
 
-Shen Guo-Hua (E-mail: shen-gh@atr.jp)
+Shen Guo-Hua
+
+## Contact
+
+Kamitani Lab, Kyoto University and ATR <kamitanilab@gmail.com>
 
 ## Acknowledgement
 
