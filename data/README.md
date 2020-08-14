@@ -30,9 +30,11 @@ Shen, Horikawa, Majima, and Kamitani (2019) Deep image reconstruction from human
 
 ## Stimulus images
 
-Training and test stimulus images should be placed in `data/images/trainig` and `data/images/test`, respectively.
+The stimulus images used in [Horikawa & Kamitani, 2017](https://www.nature.com/articles/ncomms15037) were also used in this research.
+We do not include stimulus image files in the open dataset because of license issues.
+You can request us the images via https://forms.gle/ujvA34948Xg49jdn9.
 
-We do not include stimulus image files in the open dataset because of license issues. Please contact us via email (<brainliner-admin@atr.jp>) for sharing the image files.
+Training and test stimulus images should be placed in `data/images/trainig` and `data/images/test`, respectively.
 
 Each fMRI data sample is labeled by name of the stimulus image. The name of the stimulus image is converted to a floating number (‘stimulus_id’) as follows:
 
