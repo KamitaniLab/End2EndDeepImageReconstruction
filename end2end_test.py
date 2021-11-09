@@ -11,7 +11,6 @@ import PIL.Image
 import caffe
 import numpy as np
 import scipy.io as sio
-from scipy.misc import imresize
 
 import bdpy
 
@@ -195,7 +194,7 @@ for dat in data_table:
 
         # Get top-left position of the image
         img_size0 = generator.blobs[output_layer].data.shape[2:]  # The original size of the output of the generator
-        top_left = ((img_size0[0] - img_size[0]) / 2, (img_size0[1] - img_size[1]) / 2)
+        top_left = ( int((img_size0[0] - img_size[0]) / 2), int((img_size0[1] - img_size[1]) / 2) )
 
         # Images loop
         for i, img in enumerate(image_list):
