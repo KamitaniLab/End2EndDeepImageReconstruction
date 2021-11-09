@@ -16,10 +16,50 @@ import PIL.Image
 import caffe
 import lmdb
 import numpy as np
-from scipy.misc import imresize
+import PIL
 
 import bdpy
 
+
+def imresize(img_array, img_size, interp='bilinear', mode=None):
+    '''
+    This function is an alternative to scipy.misc.imresize.
+    This should be placed elsewhere, i.e., in bdpy.utils.
+
+    Parameters
+    ----------
+    img_array : ndarray
+            The array of image to be resized.
+    img_size  : tuple
+            Size of the output image (height, width).
+    interp : str, optional
+            Interpolation to use for re-sizing ('nearest', 'lanczos', 'bilinear',
+            'bicubic' or 'cubic').
+    mode: str, optional
+            The PIL image mode ('P', 'L', etc.) to convert `img_array` before resizing.
+
+    Returns
+    -------
+    imresize : ndarray
+            The resized array of image.
+
+    '''
+    interp = interp.lower()
+    if interp == 'bilinear':
+        resample = PIL.Image.BILINEAR
+    elif interp == 'nearest':
+        resample = PIL.Image.NEAREST
+    elif interp == 'bicubic':
+        resample = PIL.Image.BICUBIC
+    elif interp == 'lanczos':
+        resample = PIL.Image.LANCZOS
+    elif interp == 'cubic':
+        resample = PIL.Image.CUBIC
+    else:
+        raise ValueError('Unknown interp parameter: %s' % interp )
+
+    img = PIL.Image.fromarray(img_array, mode=mode)
+    return np.array(img.resize(img_size, resample))
 
 # Settings ---------------------------------------------------------------
 
